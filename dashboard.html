@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard UT</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+
+    <body class="dashboard-page">
+<header>
+  <h2 id="greeting">Selamat Datang</h2>
+  <span class="header-logo">Universitas Terbuka</span>
+</header>
+
+<div class="navbar">
+  <a href="dashboard.html">Dashboard</a>
+  <a href="stok.html">Informasi Bahan Ajar</a>
+  <a href="#">Tracking Pengiriman</a>
+
+  <div class="dropdown">
+    <button class="dropbtn">Laporan ▾</button>
+    <div class="dropdown-content">
+      <a href="#">Monitoring Progress DO</a>
+      <a href="#">Rekap Bahan Ajar</a>
+    </div>
+  </div>
+
+  <a href="#">Histori Transaksi</a>
+  <button class="btn-logout" onclick="logout()">⏻ Logout</button>
+</div>
+</div>
+
+<div class="container">
+
+  <!-- Ringkasan -->
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="label">Total DO Hari Ini</div>
+      <div class="value">128</div>
+    </div>
+    <div class="stat-box">
+      <div class="label">Dalam Proses</div>
+      <div class="value">47</div>
+    </div>
+    <div class="stat-box">
+      <div class="label">Terkirim</div>
+      <div class="value">81</div>
+    </div>
+  </div>
+
+  <!-- Tracking -->
+  <div class="card">
+    <h3>Tracking Delivery Order</h3>
+    <div class="search-row">
+      <input type="text" id="do" placeholder="Masukkan Nomor DO">
+      <button onclick="cariDO()">Cari</button>
+    </div>
+
+    <div class="result-box" id="hasil">
+      <table class="result-table">
+        <tr><td>Nama Penerima</td><td id="r-nama">—</td></tr>
+        <tr><td>Status</td><td><span class="badge" id="r-status">—</span></td></tr>
+        <tr><td>Ekspedisi</td><td id="r-exp">—</td></tr>
+        <tr><td>Tanggal Kirim</td><td id="r-tgl">—</td></tr>
+        <tr><td>Jenis Paket</td><td id="r-jenis">—</td></tr>
+        <tr><td>Total Biaya</td><td id="r-total">—</td></tr>
+      </table>
+
+      <div class="progress-label">
+        <span>Progress Pengiriman</span>
+        <span id="persen">60%</span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar">60%</div>
+      </div>
+
+      <div class="steps">
+        <div class="step done">Pesanan Dibuat</div>
+        <div class="step done">Diproses</div>
+        <div class="step active">Dikirim</div>
+        <div class="step">Tiba di Tujuan</div>
+        <div class="step">Diterima</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>Dashboard Bahan Ajar &mdash; Universitas Terbuka &copy; 2026</footer>
+
+
+</body>
+</html>

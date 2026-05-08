@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Login UT</title>
+    <link rel="stylesheet" href="css/style.css">
+<script src="js/script.js" defer></script>
+
+</head>
+<body>
+
+    <body class="login-page"></body>
+    <div class="login-box">
+        <h2>Login</h2>
+
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="password" placeholder="Password">
+
+        <button onclick="login()">Login</button>
+
+        <br><br>
+
+        <a onclick="openModal('lupa')">Lupa Password</a> |
+        <a onclick="openModal('daftar')">Daftar</a>
+    </div>
+
+    <!-- Modal Lupa -->
+    <div class="modal" id="lupaModal">
+        <div class="modal-content">
+            <h3>Lupa Password</h3>
+            <p>Fitur belum tersedia</p>
+            <button onclick="closeModal()">Tutup</button>
+        </div>
+    </div>
+
+    <!-- Modal Daftar -->
+    <div class="modal" id="daftarModal">
+        <div class="modal-content">
+            <h3>Daftar</h3>
+            <p>Fitur belum tersedia</p>
+            <button onclick="closeModal()">Tutup</button>
+        </div>
+    </div>
+
+    
+
+</body>
+</html>
