@@ -1,76 +1,97 @@
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Stok Bahan Ajar</title>
     <link rel="stylesheet" href="css/style.css">
+    <!-- TIDAK ada script di sini -->
 </head>
 <body class="dashboard-page">
 
-<div class="navbar">
-  <a href="dashboard.html">Dashboard</a>
-  <a href="stok.html" class="active">Informasi Bahan Ajar</a>
-  <a href="#">Tracking Pengiriman</a>
-  <div class="dropdown">
-    <button class="dropbtn">Laporan ▾</button>
-    <div class="dropdown-content">
-      <a href="#">Monitoring Progress DO</a>
-      <a href="#">Rekap Bahan Ajar</a>
-    </div>
-  </div>
-  <a href="#">Histori Transaksi</a>
-  <button class="btn-logout" onclick="logout()">⏻ Logout</button>
-</div>
+  <div id="app">
 
-<div class="container">
-
-  <!-- FORM TAMBAH -->
-  <div class="card">
-    <div class="card-header">
-      <div class="card-icon">&#43;</div>
-      <h3>Tambah Stok</h3>
-    </div>
-    <div class="card-body">
-      <div class="form-row">
-        <div class="form-group">
-          <label for="kode">Kode</label>
-          <input type="text" id="kode" placeholder="Contoh: BA004">
+    <div class="navbar">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="stok.html" class="active">Informasi Bahan Ajar</a>
+      <a href="#">Tracking Pengiriman</a>
+      <div class="dropdown">
+        <button class="dropbtn">Laporan ▾</button>
+        <div class="dropdown-content">
+          <a href="#">Monitoring Progress DO</a>
+          <a href="#">Rekap Bahan Ajar</a>
         </div>
-        <div class="form-group form-group--wide">
-          <label for="nama">Nama Bahan Ajar</label>
-          <input type="text" id="nama" placeholder="Masukkan nama bahan ajar">
-        </div>
-        <div class="form-group">
-          <label for="stok">Jumlah Stok</label>
-          <input type="number" id="stok" placeholder="0">
-        </div>
-        <button class="btn-tambah" onclick="tambahData()">+ Tambah</button>
       </div>
+      <a href="#">Histori Transaksi</a>
+      <button class="btn-logout" @click="logout">Logout</button>
+    </div>
+
+    <div class="container">
+
+      <!-- FORM TAMBAH -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">&#43;</div>
+          <h3>Tambah Stok</h3>
+        </div>
+        <div class="card-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="kode">Kode</label>
+              <input type="text" id="kode" v-model="form.kode">
+            </div>
+            <div class="form-group form-group--wide">
+              <label for="nama">Nama Bahan Ajar</label>
+              <input type="text" id="nama" v-model="form.judul">
+            </div>
+            <div class="form-group">
+              <label for="stok">Jumlah Stok</label>
+              <input type="number" id="stok" v-model="form.qty">
+            </div>
+            <button class="btn-tambah" @click="tambahData">+ Tambah</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TABEL -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">&#128230;</div>
+          <h3>Daftar Stok</h3>
+          <p>Total Data: {{ totalData }}</p>
+        </div>
+        <div class="table-wrap">
+          <table id="tabelStok">
+            <thead>
+              <tr>
+                <th>Kode</th>
+                <th>Nama Bahan Ajar</th>
+                <th>Stok</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in stok" :key="item.kode">
+                <td>{{ item.kode }}</td>
+                <td>{{ item.judul }}</td>
+                <td>{{ item.qty }}</td>
+                <td>
+                  <span class="status aman"    v-if="item.qty > 10">Aman</span>
+                  <span class="status menipis" v-else-if="item.qty > 0">Menipis</span>
+                  <span class="status kosong"  v-else>Kosong</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <!-- TABEL -->
-  <div class="card">
-    <div class="card-header">
-      <div class="card-icon">&#128230;</div>
-      <h3>Daftar Stok</h3>
-    </div>
-    <div class="table-wrap">
-      <table id="tabelStok">
-        <thead>
-          <tr>
-            <th>Kode</th>
-            <th>Nama Bahan Ajar</th>
-            <th>Stok</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
-  </div>
+  <!-- Urutan wajib: Vue → dataBahanAjar (sudah include Vue instance) -->
+  <!-- HAPUS baris stok-app.js karena sudah digabung ke dataBahanAjar.js -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script src="js/dataBahanAjar.js"></script>
 
-</div>
-
-<script src="js/data.js"></script>
-<script src="js/script.js"></script>
 </body>
 </html>

@@ -733,5 +733,230 @@ footer {
 
 .btn-logout:hover {
   background: rgba(237, 77, 221, 0.6);
-  border-color: rgba(237, 77, 221, 0.6);
+  border-color: #ed4ddd99;
+}
+
+.status {
+  padding: 5px 10px;
+  border-radius: 10px;
+  color: white;
+  font-size: 12px;
+}
+
+.aman {
+  background: green;
+}
+
+.menipis {
+  background: orange;
+}
+
+.kosong {
+  background: red;
+}
+
+/* ================================================
+   TRACKING PAGE - Additional styles
+   Consistent with existing design system
+   ================================================ */
+
+/* Input tracking */
+.tracking-input-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.tracking-input-row input {
+  flex: 1;
+  min-width: 200px;
+  padding: 10px 14px;
+  border: 1.5px solid #e0d6f7;
+  border-radius: 8px;
+  font-size: 13px;
+  outline: none;
+  background: #fafafa;
+  color: #333;
+  font-family: 'Segoe66 UI', Tahoma, sans-serif;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.tracking-input-row input:focus {
+  border-color: #fc9eff;
+  box-shadow: 0 0 0 3px rgba(252, 158, 255, 0.15);
+  background: #fff;
+}
+
+.tracking-input-row button {
+  padding: 10px 22px;
+  background: #fc9eff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(252, 158, 255, 0.4);
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.tracking-input-row button:hover {
+  background: #e070f5;
+  transform: translateY(-1px);
+}
+
+.tracking-input-row button:active {
+  transform: translateY(0);
+}
+
+/* Data pengiriman table */
+.tracking-result {
+  margin-top: 8px;
+}
+
+.tracking-info-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-bottom: 24px;
+}
+
+.tracking-info-table td {
+  padding: 9px 12px;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: middle;
+}
+
+.tracking-info-table td:first-child {
+  color: #888;
+  width: 140px;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.tracking-info-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Section heading inside result */
+.tracking-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #0057a8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 20px 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #f0e8ff;
+}
+
+/* Timeline / riwayat perjalanan */
+.timeline {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 11px;
+  top: 4px;
+  bottom: 4px;
+  width: 2px;
+  background: linear-gradient(to bottom, #fc9eff, #e0d6f7);
+  border-radius: 2px;
+}
+
+.timeline li {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 8px 0 8px 32px;
+  position: relative;
+  font-size: 13px;
+  color: #444;
+}
+
+.timeline li::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 12px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fc9eff;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 2px #fc9eff;
+  flex-shrink: 0;
+}
+
+.timeline li:first-child::before {
+  background: #0057a8;
+  box-shadow: 0 0 0 2px #0057a8;
+}
+
+.timeline-time {
+  color: #888;
+  font-size: 12px;
+  white-space: nowrap;
+  min-width: 130px;
+}
+
+.timeline-desc {
+  color: #333;
+  line-height: 1.5;
+}
+
+/* Status badge on tracking */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-badge.dikirim {
+  background: #e7f9ee;
+  color: #1a7a3a;
+}
+
+.status-badge.proses {
+  background: #fff8e1;
+  color: #b07000;
+}
+
+.status-badge.selesai {
+  background: #e8f0fb;
+  color: #0057a8;
+}
+
+.status-badge.gagal {
+  background: #fff0f0;
+  color: #c0392b;
+}
+
+/* Empty / not found state */
+.tracking-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: #aaa;
+  font-size: 13px;
+}
+
+.tracking-empty .empty-icon {
+  font-size: 36px;
+  display: block;
+  margin-bottom: 10px;
 }
