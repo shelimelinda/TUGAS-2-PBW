@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,25 +61,43 @@
         <div class="table-wrap">
           <table id="tabelStok">
             <thead>
-              <tr>
-                <th>Kode</th>
-                <th>Nama Bahan Ajar</th>
-                <th>Stok</th>
-                <th>Status</th>
-              </tr>
+<tr>
+  <th>Kode</th>
+  <th>Nama Bahan Ajar</th>
+  <th>Kategori</th>
+  <th>UT Daerah</th>
+  <th>Lokasi Rak</th>
+  <th>Harga</th>
+  <th>Stok</th>
+  <th>Safety</th>
+  <th>Status</th>
+</tr>
             </thead>
-            <tbody>
-              <tr v-for="item in stok" :key="item.kode">
-                <td>{{ item.kode }}</td>
-                <td>{{ item.judul }}</td>
-                <td>{{ item.qty }}</td>
-                <td>
-                  <span class="status aman"    v-if="item.qty > 10">Aman</span>
-                  <span class="status menipis" v-else-if="item.qty > 0">Menipis</span>
-                  <span class="status kosong"  v-else>Kosong</span>
-                </td>
-              </tr>
-            </tbody>
+<tbody>
+  <tr v-for="item in stok" :key="item.kode">
+    <td>{{ item.kode }}</td>
+    <td>{{ item.judul }}</td>
+    <td>{{ item.kategori }}</td>
+    <td>{{ item.upbjj }}</td>
+    <td>{{ item.lokasiRak }}</td>
+    <td>{{ formatRupiah(item.harga) }}</td>
+    <td>{{ item.qty }} buah</td>
+    <td>{{ item.safety }} buah</td>
+    <td>
+      <span class="status aman" v-if="item.qty >= item.safety" :title="stripHTML(item.catatanHTML)">
+        Aman
+      </span>
+
+      <span class="status menipis" v-else-if="item.qty > 0" :title="stripHTML(item.catatanHTML)">
+        Menipis
+      </span>
+
+      <span class="status kosong" v-else :title="stripHTML(item.catatanHTML)">
+        Kosong
+      </span>
+    </td>
+  </tr>
+</tbody>
           </table>
         </div>
       </div>

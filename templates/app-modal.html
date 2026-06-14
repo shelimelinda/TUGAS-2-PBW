@@ -1,0 +1,14 @@
+<template id="tpl-modal">
+	<div class="modal" v-show="visible">
+		<div class="modal-content">
+			<h3 v-if="title">{{ title }}</h3>
+			<div class="modal-body">
+				<slot></slot>
+			</div>
+			<div style="margin-top:12px; text-align:right;">
+				<button @click="$emit('close')" style="margin-right:8px;">Batal</button>
+				<button @click="$emit('confirm')">Konfirmasi</button>
+			</div>
+		</div>
+	</div>
+</template>

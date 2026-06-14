@@ -1,0 +1,68 @@
+<template id="tpl-tracking">
+
+	<div class="card">
+		<div class="card-header">
+			<div class="card-icon">📦</div>
+			<h3>Tracking Delivery Order</h3>
+		</div>
+
+		<div class="card-body">
+
+			<div class="tracking-input-row">
+				<input
+					type="text"
+					v-model="nomorDO"
+					placeholder="Masukkan Nomor DO"
+				>
+				<button @click="cekTracking">🔍 Cek Tracking</button>
+			</div>
+
+			<div v-if="!hasilTracking" class="tracking-empty">
+				<span class="empty-icon">📋</span>
+				Masukkan nomor DO untuk melihat status pengiriman
+			</div>
+
+			<div v-if="hasilTracking" class="tracking-result">
+
+				<table class="tracking-info-table">
+					<tr>
+						<td>Nama</td>
+						<td>{{ hasilTracking.nama }}</td>
+					</tr>
+					<tr>
+						<td>NIM</td>
+						<td><span class="kode-badge">{{ hasilTracking.nim }}</span></td>
+					</tr>
+					<tr>
+						<td>Status</td>
+						<td>
+							<span class="status-badge" :class="hasilTracking.statusClass">
+								{{ hasilTracking.status }}
+							</span>
+						</td>
+					</tr>
+					<tr>
+						<td>Ekspedisi</td>
+						<td>{{ hasilTracking.ekspedisi }}</td>
+					</tr>
+					<tr>
+						<td>Tanggal Kirim</td>
+						<td>{{ hasilTracking.tanggalKirim }}</td>
+					</tr>
+				</table>
+
+				<div class="tracking-section-title">Riwayat Perjalanan</div>
+
+				<ul class="timeline">
+					<li v-for="item in hasilTracking.perjalanan">
+						<span class="timeline-time">{{ item.waktu }}</span>
+						<span class="timeline-desc">{{ item.keterangan }}</span>
+					</li>
+				</ul>
+
+			</div>
+
+		</div>
+	</div>
+
+</template>

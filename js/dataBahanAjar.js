@@ -74,35 +74,77 @@ var app = new Vue({
         ]
       }
     },
-    form: {
-      kode: '',
-      judul: '',
-      qty: ''
-    }
+form: {
+  kode: '',
+  judul: '',
+  kategori: '',
+  upbjj: '',
+  lokasiRak: '',
+  harga: '',
+  qty: '',
+  safety: '',
+  catatanHTML: ''
+}
   },
 
   methods: {
-    tambahData() {
-      // Validasi: semua field wajib diisi
-      if (!this.form.kode || !this.form.judul || this.form.qty === '') {
-        alert('Semua field harus diisi!');
-        return;
-      }
+  tambahData() {
+  if (
+    !this.form.kode ||
+    !this.form.judul ||
+    !this.form.kategori ||
+    !this.form.upbjj ||
+    !this.form.lokasiRak ||
+    this.form.harga === '' ||
+    this.form.qty === '' ||
+    this.form.safety === ''
+  ) {
+    alert('Semua field utama harus diisi!');
+    return;
+  }
 
-      this.stok.push({
-        kode: this.form.kode,
-        judul: this.form.judul,
-        qty: Number(this.form.qty)  // PENTING: konversi ke angka
-      });
+  this.stok.push({
+    kode: this.form.kode,
+    judul: this.form.judul,
+    kategori: this.form.kategori,
+    upbjj: this.form.upbjj,
+    lokasiRak: this.form.lokasiRak,
+    harga: Number(this.form.harga),
+    qty: Number(this.form.qty),
+    safety: Number(this.form.safety),
+    catatanHTML: this.form.catatanHTML
+  });
 
-      this.form.kode = '';
-      this.form.judul = '';
-      this.form.qty = '';
-    },
+  this.form = {
+    kode: '',
+    judul: '',
+    kategori: '',
+    upbjj: '',
+    lokasiRak: '',
+    harga: '',
+    qty: '',
+    safety: '',
+    catatanHTML: ''
+  };
+},
 
-    logout() {
-      alert('Logout berhasil!');
-    }
+formatRupiah(angka) {
+    return new Intl.NumberFormat('id-ID', {
+      style: 'currency',
+      currency: 'IDR',
+      minimumFractionDigits: 0
+    }).format(angka);
+  },
+
+  stripHTML(html) {
+    const div = document.createElement('div');
+    div.innerHTML = html || '';
+    return div.textContent || div.innerText || '';
+  },
+
+  logout() {
+    alert('Logout berhasil!');
+  }
   },
 
   computed: {

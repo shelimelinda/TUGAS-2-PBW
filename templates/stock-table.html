@@ -1,0 +1,95 @@
+<template id="tpl-stock">
+
+	<!-- FORM TAMBAH / EDIT -->
+	<div class="card">
+		<div class="card-header">
+			<div class="card-icon">&#43;</div>
+			<h3>{{ editingIndex === null ? 'Tambah Stok' : 'Edit Stok' }}</h3>
+		</div>
+		<div class="card-body">
+			<div class="form-row">
+				<div class="form-group">
+					<label for="kode">Kode</label>
+					<input type="text" id="kode" v-model="form.kode" @keyup.enter="submitForm">
+				</div>
+				<div class="form-group form-group--wide">
+					<label for="nama">Nama Bahan Ajar</label>
+					<input type="text" id="nama" v-model="form.judul" @keyup.enter="submitForm">
+				</div>
+				<div class="form-group">
+					<label for="stok">Jumlah Stok</label>
+					<input type="number" id="stok" v-model="form.qty" @keyup.enter="submitForm">
+				</div>
+				<button class="btn-tambah" @click="submitForm">{{ editingIndex === null ? '+ Tambah' : 'Simpan' }}</button>
+				<button v-if="editingIndex !== null" @click="cancelEdit" style="margin-left:8px;">Batal</button>
+			</div>
+			<div v-if="qtyWarning" style="color:#a00; margin-top:8px;">{{ qtyWarning }}</div>
+		</div>
+	</div>
+
+	<!-- TABEL + FILTERS + SORT -->
+	<div class="card">
+		<div class="card-header">
+			<div class="card-icon">&#128230;</div>
+			<h3>Daftar Stok</h3>
+			<p>Total Data: {{ totalData }}</p>
+		</div>
+		<div class="card-body">
+			<div class="search-row" style="margin-bottom:12px;">
+				<select v-model="selectedUpbjj">
+					<option value="">Semua UPBJJ</option>
+					<option v-for="u in upbjjOptions" :key="u" :value="u">{{ u }}</option>
+				</select>
+
+				<select v-model="selectedKategori">
+					<option value="">Semua Kategori</option>
+					<option v-for="k in kategoriOptions" :key="k" :value="k">{{ k }}</option>
+				</select>
+
+				<button @click="setSort('judul')">Sort Judul {{ sortKey==='judul' ? (sortDir==='asc' ? '↑' : '↓') : '' }}</button>
+				<button @click="setSort('harga')">Sort Harga {{ sortKey==='harga' ? (sortDir==='asc' ? '↑' : '↓') : '' }}</button>
+				<button @click="setSort('qty')">Sort Stok {{ sortKey==='qty' ? (sortDir==='asc' ? '↑' : '↓') : '' }}</button>
+
+				<input placeholder="Cari judul..." v-model="searchText" style="margin-left:8px;">
+			</div>
+
+			<div class="table-wrap">
+				<table id="tabelStok">
+					<thead>
+						<tr>
+							<th>Kode</th>
+							<th>Nama Bahan Ajar</th>
+							<th>Harga</th>
+							<th>Stok</th>
+							<th>Status</th>
+							<th>Aksi</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr v-for="(item, idx) in filteredItems" :key="item.kode">
+							<td>{{ item.kode }}</td>
+							<td>{{ item.judul }}</td>
+							<td>{{ item.harga || '-' }}</td>
+							<td>{{ item.qty }}</td>
+							<td>
+								<span class="status aman"    v-if="item.qty > 10">Aman</span>
+								<span class="status menipis" v-else-if="item.qty > 0">Menipis</span>
+								<span class="status kosong"  v-else>Kosong</span>
+							</td>
+							<td>
+								<button @click="startEdit(item, idx)">Edit</button>
+								<button @click="promptDelete(idx)">Hapus</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal konfirmasi delete -->
+	<app-modal :visible="showDeleteModal" title="Konfirmasi Hapus" @confirm="confirmDelete" @close="showDeleteModal=false">
+		Apakah Anda yakin ingin menghapus item <strong>{{ deleteCandidateKode }}</strong>?
+	</app-modal>
+
+</template>
